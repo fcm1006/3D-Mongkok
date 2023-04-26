@@ -4,9 +4,9 @@
 
 The Chinese University of Hong Kong
 
-（Geography & Resource Management; MSc in Geoinformation Science and Smart Cities）
+Geography & Resource Management; MSc in Geoinformation Science and Smart Cities
 
-(Fei Chengman, Zhu Yuanyuan, YIZINAER Kaerken) 
+Fei Chengman, Zhu Yuanyuan, YIZINAER Kaerken
 
 Key words: 3D GIS; Web GIS; 
 
