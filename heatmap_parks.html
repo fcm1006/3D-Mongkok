@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap' 
+            async defer></script>
+    <script type='text/javascript'>
+        function GetMap() {
+            var map = new Microsoft.Maps.Map('#myMap', {
+                credentials: 'Ajxu66WjZkiyHhgOzXXDWPaDs31KIucoJ7YL0yC5-bP_eg0cjOqjsCCyB6dIHcR_',
+                center: new Microsoft.Maps.Location(22.320295716518384, 114.16962955091176),
+                zoom: 15
+            });
+
+            var myGeoJSON = 
+            {
+                "type": "FeatureCollection",
+                "features": [{
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "MultiPoint",
+                        "coordinates": [
+                            [114.17866800000,22.32280900000],
+                            [114.17804000000,22.31348900000],
+                            [114.17911700000,22.31393100000],
+                            [114.16757300000,22.31218700000],
+                            [114.17174300000,22.30988400000],
+                            [114.17284300000,22.31153700000],
+                            [114.17377100000,22.31015300000],
+                            [114.17754100000,22.31814100000],
+                            [114.16912500000,22.31534900000],
+                            [114.17031900000,22.32202900000],
+                            [114.17477400000,22.32100200000],
+                            [114.17457700000,22.31081000000],
+                            [114.17478800000,22.31199500000],
+                            [114.17401200000,22.31229100000],
+                            [114.17402100000,22.31220500000],
+                            [114.17679500000,22.31462200000],
+                            [114.17232400000,22.31345300000],
+                            [114.17165500000,22.31457400000],
+                            [114.17353700000,22.32031400000],
+                            [114.17403400000,22.32044700000],
+                            [114.17249200000,22.32004200000],
+                            [114.17120700000,22.32094400000]
+                        ]
+                    }
+                }]
+            };
+
+            //Load the GeoJSON and HeatMap modules.
+            Microsoft.Maps.loadModule(['Microsoft.Maps.GeoJson', 'Microsoft.Maps.HeatMap'], function () {
+                var geojson = Microsoft.Maps.GeoJson.read(myGeoJSON);
+                var heatmap = new Microsoft.Maps.HeatMapLayer(geojson);
+                map.layers.insert(heatmap);
+                heatMap.setOptions({
+                        intensity: 0.65,
+                        radius: 100000,
+                        unit: 'meters',
+                        colorGradient: {
+                            '0': 'Black',
+                            '0.4': 'Purple',
+                            '0.6': 'Red',
+                            '0.8': 'Yellow',
+                            '1': 'White'
+                }
+                    });
+            });
+        }
+    </script>
+</head>
+<body>
+    <div id="myMap" style="position:relative;width:100%;height:100%;"></div>
+</body>
+</html>

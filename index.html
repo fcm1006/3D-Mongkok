@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- Tell IE to use the latest, best version. -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <!-- 使移动应用程序占用全屏浏览器并禁用用户缩放. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="image/earth.ico" href="earth.ico" type="image/x-icon" />
+    <!--Cesium Viewer小部件-->
+    <link href="./Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+
+    <!--bootstrap-->
+	<link rel="stylesheet" href="libs/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="libs/jqueryui/jquery-ui.css">
+    <!--初始化界面样式-->
+	<link rel="stylesheet" href="css/index.css" />
+	<!--工具条-->
+	<link rel="stylesheet" href="css/toobar.css" />
+	
+    <link href="./css/pretty.css" rel="stylesheet">
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/config.js"></script>
+    <!-- <link rel="stylesheet" href="css/index.css" /> -->
+	<!--工具条-->
+	<!-- <link rel="stylesheet" href="css/toobar.css" /> -->
+    <script type="text/javascript" src="./Build/Cesium/Cesium.js"></script>
+
+    <!-- <style>
+        
+			@import url(./Build/Cesium/Widgets/widgets.css);
+ 
+			html,
+			body,
+			#cesiumContainer {
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+			} -->
+	
+
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-default" style="z-index: 2000;">
+		<div class="container-fluid">
+		  <!-- Brand and toggle get grouped for better mobile display -->
+		  <div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			  <span class="sr-only">Toggle navigation</span>
+			  <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">
+					<img alt="LOGO" src="image/page/nav/logo.png" style="width: 50px;height: 32px;display: inline-block;padding-bottom: 12px">
+				三维旺角可视化系统</a>
+		  </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+		  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                    <!--专题信息-->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            <img src="image/page/nav/nav-thematicmap.png"/>
+                            Thematic Map <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            
+                            <li id="catering-map" onclick="location.href='heatmap_catering.html';"><a href="#">Catering Heatmap</a></li>
+                            
+                            <li id="hospital-map" onclick="location.href='heatmap_hospital.html';"><a href="#">Hospital Heatmap</a></li>
+                            <!-- <li id="spreadModel"><a href="#">扩散模型</a></li> -->
+                            
+                            <li id="parks_map" onclick="location.href='heatmap_parks.html';"><a href="#">Park Heatmap</a></li>
+                        </ul>
+                    </li>
+							<!--三维分析-->
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                <img src="image/page/nav/nav-data.png"/>
+                                3D Analysis <span class="caret"></span>
+                                
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- <li id="searching"><a href="#">空间查询</a></li> -->
+                                <li id="measurement" onclick="location.href='Measurement.html';"><a href="#">Spatial Measurement</a></li>
+                                
+                                <li id="sightline" onclick="location.href='Sightline Analysis.html';"><a href="#">Sightline Analysis</a></li>
+                                
+                                <li id="viewshed" onclick="location.href='Viewshed Analysis.html';"><a href="#">Viewshed Analysis</a></li>
+                               
+                                <li id="skyline" onclick="location.href='Skyline.html';"><a href="#">Skyline Analysis</a></li>
+                            </ul>
+                        </li>
+                        <!--显示设置-->
+							<!-- <li>
+								<a href="#" id="displaySettingA" onclick="location.href='index.html';">
+									<img src="img/page/nav/nav-setting.png"/>
+									<span>回到主页</span>
+								</a>
+							</li> -->
+                    </ul>
+    	  </div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+	</nav>
+<!--地图容器-->
+<div id="cesiumContainer"></div>
+
+<!--空间量算-->
+<div id="measurement" class="functionWin">
+    <div class="head move">
+        <span class="title">
+            空间量算
+        </span>
+        <span class="close headfun_win" id="closeNewYork">
+            <img src="image/page/fun/close.png"/>
+        </span>
+        <span class="toggle_win headfun_win">
+            <img src="image/page/fun/arrow_top.png"/>
+        </span>
+        function toViewshed(){
+            window.location.href= "Viewshed Analysis.html";
+    </div>
+    
+</div>
+
+<script>
+    // function onload(Cesium) {
+        
+        Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlZDY5NzFhNy0zOTU5LTQ2N2ItYTk1YS01MmMwOWFhNDc1ZmUiLCJpZCI6MTE4NTQzLCJpYXQiOjE2NzY2MjI1Njh9.WX12aufHT9IH4BX1bvhnMgOfpQvuL4yEm-y5dW1hDmI'
+        
+        
+        var viewer = new Cesium.Viewer('cesiumContainer');
+        // remove the SuperMap Logo
+        viewer._cesiumWidget._creditContainer.style.display = "none";
+        // viewer.imageryLayers.addImageryProvider(new Cesium.IonImageryProvider({ assetId : 96188 }))    
+ 
+
+        // var scene = viewer.scene;
+        // var promise = scene.open("http://localhost:8090/iserver/services/3D-OriginalMongkok/rest/realspace");  //url为在SuperMap iServer上发布的服务地址
+
+    //     Cesium.when(promise, function (layers) {
+    //     //设置相机位置、视角，便于观察场景
+    //     scene.camera.setView({
+    //         destination: new Cesium.Cartesian3.fromDegrees(114.1558968287539, 22.300745422387312, 500),
+    //         orientation: {
+    //             heading: 5,
+    //             pitch: -1.5188,
+    //             roll: 6.283185307179563
+    //         }
+    //    });
+    // })
+            
+            
+
+    
+    
+</script>
+</body>
+    <script src="libs/jquery/jquery.js"></script>
+    <!--cesium-->
+    <!-- <script src="libs/Cesium/Cesium.js"></script> -->
+
+    <!-- 配置文件 -->
+	<!-- <script src="js/config.js"></script> -->
+	<!--工具条-->
+	<script src="js/utils/toorbar.js"></script>
+	<script src="js/utils/utils.js"></script>
+
+    <!--地球操作有关函数-->
+	<!-- <script src="js/map/MapStatic.js"></script>
+	<script src="js/earthOpera.js"></script> -->
+
+    <!--ui插件-->
+	<script src="libs/bootstrap/js/bootstrap.js"></script>
+	<script src="libs/jqueryui/jquery-ui.js"></script>
+</html>
